@@ -1,0 +1,24 @@
+### Film-Eintrag speichern
+POST http://localhost:8080/api/movie-entries
+Content-Type: application/json
+
+{
+  "owner": "viktor",
+  "tmdbId": 550,
+  "title": "Fight Club",
+  "seen": true,
+  "toWatch": false,
+  "favorite": true
+}
+
+### Alle Film-Einträge von viktor holen
+GET http://localhost:8080/api/movie-entries?owner=viktor
+
+### Favoriten von viktor holen
+GET http://localhost:8080/api/movie-entries/favorites?owner=viktor
+
+### Gesehene Filme von viktor holen
+GET http://localhost:8080/api/movie-entries/seen?owner=viktor
+
+### Watchlist von viktor holen
+GET http://localhost:8080/api/movie-entries/watchlist?owner=viktor
