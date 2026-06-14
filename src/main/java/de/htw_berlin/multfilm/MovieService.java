@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class MovieService {
     @Autowired
+    private MovieEntryRepository movieRepository;
+
     private final TmdbApiClient tmdb;
 
     public MovieService(TmdbApiClient tmdb) {

@@ -13,10 +13,8 @@ import java.util.List;
 //wird von MovieService erstellt und von TmdbController zurückgegeben
 //record ist eine spezielle Klasse in Java, die hauptsächlich Daten enthält 
 //und automatisch Getter, equals, hashCode und toString generiert
-@Enabled
+
 public record MovieDto(
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
         String title,
         String overview,
         String posterUrl,

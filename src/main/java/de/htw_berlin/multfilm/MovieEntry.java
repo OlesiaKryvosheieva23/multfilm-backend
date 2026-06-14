@@ -4,14 +4,25 @@ package de.htw_berlin.multfilm;
 //enthält Titel
 //enthält Setter und Getter
 
+/*
+Alter Stand, nur auskommentiert:
+
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jdk.jfr.Enabled;
+import org.springframework.data.annotation.Id;
+
+@Enabled
 public class MovieEntry {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     String title;
     boolean seen;
     boolean toWatch;
     boolean favorite;
 
 
-
+    public MovieEntry() {}
 
     public MovieEntry(String title) {
         this.title = title;
@@ -20,7 +31,6 @@ public class MovieEntry {
     public String getTitle() {
         return title;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -47,5 +57,91 @@ public class MovieEntry {
 
     public void setSeen(boolean seen) {
         this.seen = seen;
+    }
+}
+*/
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
+public class MovieEntry {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String owner;
+    private int tmdbId;
+    private String title;
+    private boolean seen;
+    private boolean toWatch;
+    private boolean favorite;
+
+    public MovieEntry() {
+    }
+
+    public MovieEntry(String owner, int tmdbId, String title) {
+        this.owner = owner;
+        this.tmdbId = tmdbId;
+        this.title = title;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public int getTmdbId() {
+        return tmdbId;
+    }
+
+    public void setTmdbId(int tmdbId) {
+        this.tmdbId = tmdbId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public boolean isSeen() {
+        return seen;
+    }
+
+    public void setSeen(boolean seen) {
+        this.seen = seen;
+    }
+
+    public boolean isToWatch() {
+        return toWatch;
+    }
+
+    public void setToWatch(boolean toWatch) {
+        this.toWatch = toWatch;
+    }
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
     }
 }
