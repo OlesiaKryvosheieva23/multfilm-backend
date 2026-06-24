@@ -44,22 +44,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @Service
 public class MovieEntryService {
 
-    private final MovieEntryRepository repo;
+    @Autowired
+    MovieEntryRepository repo;
 
-    public MovieEntryService(MovieEntryRepository repo) {
-        this.repo = repo;
-    }
+//    public MovieEntryService(MovieEntryRepository repo) {
+//     this.repo = repo;
+//  }
 
     public MovieEntry save(MovieEntry movieEntry) {
         return repo.save(movieEntry);
     }
 
-    public MovieEntry get(Long id) {
-        return repo.findById(id).orElseThrow(RuntimeException::new);
+    public MovieEntry get(Long movieID) {
+        return repo.findById(movieID).orElseThrow(RuntimeException::new);
     }
 
     public List<MovieEntry> getAllWithoutOwner() {
@@ -67,7 +70,7 @@ public class MovieEntryService {
         List<MovieEntry> movieEntries = new ArrayList<>();
 
         for (MovieEntry movieEntry : iterator) {
-            if (movieEntry.getOwner() == null || movieEntry.getOwner().equals("")) {
+            if (movieEntry.getOwner() == null || movieEntry.getOwner().isEmpty()) {
                 movieEntries.add(movieEntry);
             }
         }
@@ -79,15 +82,23 @@ public class MovieEntryService {
         return repo.findByOwner(owner);
     }
 
-    public List<MovieEntry> getFavorites(String owner) {
-        return repo.findByOwnerAndFavoriteTrue(owner);
+//    public List<MovieEntry> getFavorites(String owner) {
+//        return repo.findByOwnerAndFavoriteTrue(owner);
+//    }
+//
+//    public List<MovieEntry> getSeen(String owner) {
+//        return repo.findByOwnerAndSeenTrue(owner);
+//    }
+//
+//    public List<MovieEntry> getToWatch(String owner) {
+//        return repo.findByOwnerAndToWatchTrue(owner);
+//    }
+    public List<MovieEntry> getToWatch() {
+        return repo.findByToWatchTrue();
     }
-
-    public List<MovieEntry> getSeen(String owner) {
-        return repo.findByOwnerAndSeenTrue(owner);
-    }
-
-    public List<MovieEntry> getToWatch(String owner) {
-        return repo.findByOwnerAndToWatchTrue(owner);
+    public MovieEntry removeFromWatchlist(Long movieID) {
+        MovieEntry movie = repo.findById(movieID).orElseThrow(RuntimeException::new);
+        movie.setToWatch(false);
+        return repo.save(movie);
     }
 }

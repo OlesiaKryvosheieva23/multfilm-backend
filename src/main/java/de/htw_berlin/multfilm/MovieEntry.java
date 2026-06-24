@@ -71,30 +71,33 @@ public class MovieEntry {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long movieID;
 
     private String owner;
-    private int tmdbId;
+    private Long id;
     private String title;
-    private boolean seen;
+    private String posterUrl;
     private boolean toWatch;
-    private boolean favorite;
+
 
     public MovieEntry() {
     }
 
-    public MovieEntry(String owner, int tmdbId, String title) {
-        this.owner = owner;
-        this.tmdbId = tmdbId;
+    public MovieEntry( String title, String owner, Long id, Long movieID, String posterUrl) {
         this.title = title;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
+        this.owner = owner;
         this.id = id;
+        this.movieID = movieID;
+        this.posterUrl = posterUrl;
+
+    }
+
+    public Long getMovieID() {
+        return movieID;
+    }
+
+    public void setMovieID(Long movieID) {
+        this.movieID = movieID;
     }
 
     public String getOwner() {
@@ -105,12 +108,12 @@ public class MovieEntry {
         this.owner = owner;
     }
 
-    public int getTmdbId() {
-        return tmdbId;
+    public Long getId() {
+        return id;
     }
 
-    public void setTmdbId(int tmdbId) {
-        this.tmdbId = tmdbId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -121,14 +124,14 @@ public class MovieEntry {
         this.title = title;
     }
 
-    public boolean isSeen() {
-        return seen;
-    }
-
-    public void setSeen(boolean seen) {
-        this.seen = seen;
-    }
-
+//    public boolean isSeen() {
+//        return seen;
+//    }
+//
+//    public void setSeen(boolean seen) {
+//        this.seen = seen;
+//    }
+//
     public boolean isToWatch() {
         return toWatch;
     }
@@ -136,12 +139,20 @@ public class MovieEntry {
     public void setToWatch(boolean toWatch) {
         this.toWatch = toWatch;
     }
+//
+//    public boolean isFavorite() {
+//        return favorite;
+//    }
+//
+//    public void setFavorite(boolean favorite) {
+//        this.favorite = favorite;
+//    }
 
-    public boolean isFavorite() {
-        return favorite;
+    public String getPosterUrl() {
+        return posterUrl;
+    }
+    public void setPosterUrl(String posterUrl) {
+        this.posterUrl = posterUrl;
     }
 
-    public void setFavorite(boolean favorite) {
-        this.favorite = favorite;
-    }
 }

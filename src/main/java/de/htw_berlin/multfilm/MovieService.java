@@ -49,7 +49,8 @@ public class MovieService {
                 (String) details.get("release_date"),
                 genres,
                 cast,
-                director
+                director,
+                ((Number) details.get("vote_average")).doubleValue()
         );
     }
 }

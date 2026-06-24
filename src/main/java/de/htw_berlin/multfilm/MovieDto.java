@@ -21,6 +21,7 @@ public record MovieDto(
         String releaseDate,
         List<String> genres,
         List<String> cast,
-        String director
+        String director,
+        Double voteAverage
 ) {}
 
