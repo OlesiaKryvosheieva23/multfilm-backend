@@ -54,6 +54,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
 @CrossOrigin(origins = {
         "http://localhost:5173",
         "https://multfilm-frontend.onrender.com"
@@ -62,41 +65,66 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/movie-entries")
 public class MovieEntryController {
 
-    private final MovieEntryService service;
+    @Autowired
+    MovieEntryService service;
     private final Logger logger = LoggerFactory.getLogger(MovieEntryController.class);
 
     public MovieEntryController(MovieEntryService service) {
         this.service = service;
     }
 
+    @CrossOrigin
     @PostMapping
     public MovieEntry createMovieEntry(@RequestBody MovieEntry movieEntry) {
+        System.out.println("POST angekommen");
         return service.save(movieEntry);
     }
 
+    @CrossOrigin
     @GetMapping("/{id}")
-    public MovieEntry getMovieEntry(@PathVariable Long id) {
-        logger.info("GET request on route /api/movie-entries/{}", id);
-        return service.get(id);
+    public MovieEntry getMovieEntry(@PathVariable Long movieID) {
+            logger.info("GET request on route /api/movie-entries/{}", movieID);
+        return service.get(movieID);
     }
 
+    @CrossOrigin
     @GetMapping
     public List<MovieEntry> getAllMovieEntries(@RequestParam(defaultValue = "") String owner) {
         return owner.equals("") ? service.getAllWithoutOwner() : service.getAllOwnedBy(owner);
     }
 
-    @GetMapping("/favorites")
-    public List<MovieEntry> getFavorites(@RequestParam String owner) {
-        return service.getFavorites(owner);
-    }
+//    @CrossOrigin
+//    @GetMapping("/favorites")
+//    public List<MovieEntry> getFavorites(@RequestParam String owner) {
+//        return service.getFavorites(owner);
+//    }
 
-    @GetMapping("/seen")
-    public List<MovieEntry> getSeen(@RequestParam String owner) {
-        return service.getSeen(owner);
-    }
+//    @CrossOrigin
+//    @GetMapping("/seen")
+//    public List<MovieEntry> getSeen(@RequestParam String owner) {
+//        return service.getSeen(owner);
+//    }
+//
+//    @CrossOrigin
+//    @GetMapping("/watchlist")
+//    public List<MovieEntry> getToWatch(@RequestParam String owner) {
+//        return service.getToWatch(owner);
+//    }
 
+    @CrossOrigin
     @GetMapping("/watchlist")
-    public List<MovieEntry> getToWatch(@RequestParam String owner) {
-        return service.getToWatch(owner);
+    public List<MovieEntry> getToWatch() {
+        return service.getToWatch();
+    }
+
+    @CrossOrigin
+    @PutMapping("/{movieID}/remove-watchlist")
+    public MovieEntry removeFromWatchlist(@PathVariable Long movieID) {
+
+        MovieEntry movie = service.get(movieID);
+
+        movie.setToWatch(false);
+
+        return service.save(movie);
     }
 }

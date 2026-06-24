@@ -73,6 +73,11 @@ public class TmdbController {
         return getMovieData(id).director();
     }
 
+    @GetMapping("/movie/{id}/vote-average")
+    public Double getMovieVoteAverage(@PathVariable int id) {
+        return getMovieData(id).voteAverage();
+    }
+
 
 //    @CrossOrigin
     //liefert eine Liste aktuell trendender Filme aus der TMDB-API

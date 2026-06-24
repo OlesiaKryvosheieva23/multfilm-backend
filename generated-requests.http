@@ -5,10 +5,8 @@ Content-Type: application/json
 {
   "owner": "viktor",
   "tmdbId": 550,
-  "title": "Fight Club",
-  "seen": true,
-  "toWatch": false,
-  "favorite": true
+  "title": "Fight Club"
+
 }
 
 ### Alle Film-Einträge von viktor holen
