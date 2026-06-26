@@ -75,4 +75,17 @@ class MovieEntryServiceTest {
         assertFalse(result.isSeen());
         verify(repo).save(movie);
     }
+
+    @Test
+    void updateCommentSavesCommentText() {
+        MovieEntry movie = new MovieEntry();
+        movie.setMovieID(1L);
+        when(repo.findById(1L)).thenReturn(Optional.of(movie));
+        when(repo.save(movie)).thenReturn(movie);
+
+        MovieEntry result = service.updateComment(1L, "Sehr guter Film.");
+
+        assertTrue(result.getCommentText().contains("Sehr guter Film"));
+        verify(repo).save(movie);
+    }
 }

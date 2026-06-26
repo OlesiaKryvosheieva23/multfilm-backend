@@ -42,6 +42,7 @@ public class MovieEntryController {
 */
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -160,5 +161,11 @@ public class MovieEntryController {
     @PutMapping("/{movieID}/toggle-seen")
     public MovieEntry toggleSeen(@PathVariable Long movieID) {
         return service.toggleSeen(movieID);
+    }
+
+    @CrossOrigin
+    @PutMapping("/{movieID}/comment")
+    public MovieEntry updateComment(@PathVariable Long movieID, @RequestBody Map<String, String> body) {
+        return service.updateComment(movieID, body.get("commentText"));
     }
 }

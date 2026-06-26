@@ -130,4 +130,10 @@ public class MovieEntryService {
         movie.setSeen(!movie.isSeen());
         return repo.save(movie);
     }
+
+    public MovieEntry updateComment(Long movieID, String commentText) {
+        MovieEntry movie = get(movieID);
+        movie.setCommentText(commentText);
+        return repo.save(movie);
+    }
 }

@@ -65,6 +65,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Column;
 
 @Entity
 public class MovieEntry {
@@ -79,6 +80,8 @@ public class MovieEntry {
     private String posterUrl;
     private boolean toWatch;
     private Boolean seen = false;
+    @Column(length = 1000)
+    private String commentText = "";
 
 
     public MovieEntry() {
@@ -147,6 +150,14 @@ public class MovieEntry {
 
     public void setSeen(boolean seen) {
         this.seen = seen;
+    }
+
+    public String getCommentText() {
+        return commentText;
+    }
+
+    public void setCommentText(String commentText) {
+        this.commentText = commentText == null ? "" : commentText;
     }
 //
 //    public boolean isFavorite() {
