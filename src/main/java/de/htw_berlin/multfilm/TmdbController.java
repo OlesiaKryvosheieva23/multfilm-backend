@@ -82,7 +82,6 @@ public class TmdbController {
         return getMovieData(id).voteAverage();
     }
 
-
 //    @CrossOrigin
     //liefert eine Liste aktuell trendender Filme aus der TMDB-API
     @GetMapping("/trending")
