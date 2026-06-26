@@ -1,6 +1,7 @@
 package de.htw_berlin.multfilm;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.web.server.ResponseStatusException;
 
 @ExtendWith(MockitoExtension.class)
 class MovieEntryServiceTest {
@@ -87,5 +89,54 @@ class MovieEntryServiceTest {
 
         assertTrue(result.getCommentText().contains("Sehr guter Film"));
         verify(repo).save(movie);
+    }
+
+    @Test
+    void getThrowsClearErrorWhenMovieEntryDoesNotExist() {
+        when(repo.findById(404L)).thenReturn(Optional.empty());
+
+        ResponseStatusException exception = assertThrows(
+                ResponseStatusException.class,
+                () -> service.get(404L)
+        );
+
+        assertTrue(exception.getMessage().contains("wurde nicht gefunden"));
+    }
+
+    @Test
+    void getThrowsClearErrorWhenMovieIDIsInvalid() {
+        ResponseStatusException exception = assertThrows(
+                ResponseStatusException.class,
+                () -> service.get(0L)
+        );
+
+        assertTrue(exception.getMessage().contains("groesser als 0"));
+    }
+
+    @Test
+    void saveThrowsClearErrorWhenTitleIsMissing() {
+        MovieEntry movie = new MovieEntry();
+        movie.setId(123L);
+
+        ResponseStatusException exception = assertThrows(
+                ResponseStatusException.class,
+                () -> service.save(movie)
+        );
+
+        assertTrue(exception.getMessage().contains("Filmtitel"));
+    }
+
+    @Test
+    void updateCommentThrowsClearErrorWhenCommentIsTooLong() {
+        MovieEntry movie = new MovieEntry();
+        movie.setMovieID(1L);
+        when(repo.findById(1L)).thenReturn(Optional.of(movie));
+
+        ResponseStatusException exception = assertThrows(
+                ResponseStatusException.class,
+                () -> service.updateComment(1L, "a".repeat(1001))
+        );
+
+        assertTrue(exception.getMessage().contains("maximal 1000"));
     }
 }

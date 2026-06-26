@@ -46,6 +46,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,6 +58,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @CrossOrigin(originPatterns = {
         "http://localhost:*",
@@ -131,12 +133,7 @@ public class MovieEntryController {
     @CrossOrigin
     @PutMapping("/{movieID}/remove-watchlist")
     public MovieEntry removeFromWatchlist(@PathVariable Long movieID) {
-
-        MovieEntry movie = service.get(movieID);
-
-        movie.setToWatch(false);
-
-        return service.save(movie);
+        return service.removeFromWatchlist(movieID);
     }
 
     @CrossOrigin
@@ -166,6 +163,10 @@ public class MovieEntryController {
     @CrossOrigin
     @PutMapping("/{movieID}/comment")
     public MovieEntry updateComment(@PathVariable Long movieID, @RequestBody Map<String, String> body) {
+        if (body == null || !body.containsKey("commentText")) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Request body braucht das Feld commentText.");
+        }
+
         return service.updateComment(movieID, body.get("commentText"));
     }
 }

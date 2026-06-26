@@ -43,9 +43,11 @@ public class MovieEntryService {
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class MovieEntryService {
@@ -58,11 +60,26 @@ public class MovieEntryService {
 //  }
 
     public MovieEntry save(MovieEntry movieEntry) {
+        if (movieEntry == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Movie entry darf nicht leer sein.");
+        }
+
+        if (movieEntry.getTitle() == null || movieEntry.getTitle().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Movie entry braucht einen Filmtitel.");
+        }
+
+        if (movieEntry.getId() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Movie entry braucht eine TMDB-Film-ID.");
+        }
+
         return repo.save(movieEntry);
     }
 
     public MovieEntry get(Long movieID) {
-        return repo.findById(movieID).orElseThrow(RuntimeException::new);
+        validateMovieID(movieID);
+
+        return repo.findById(movieID).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Film mit movieID " + movieID + " wurde nicht gefunden."));
     }
 
     public List<MovieEntry> getAllWithoutOwner() {
@@ -79,6 +96,10 @@ public class MovieEntryService {
     }
 
     public List<MovieEntry> getAllOwnedBy(String owner) {
+        if (owner == null || owner.isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Owner darf nicht leer sein.");
+        }
+
         return repo.findByOwner(owner);
     }
 
@@ -102,7 +123,7 @@ public class MovieEntryService {
     }
 
     public MovieEntry removeFromWatchlist(Long movieID) {
-        MovieEntry movie = repo.findById(movieID).orElseThrow(RuntimeException::new);
+        MovieEntry movie = get(movieID);
         movie.setToWatch(false);
         return repo.save(movie);
     }
@@ -133,7 +154,22 @@ public class MovieEntryService {
 
     public MovieEntry updateComment(Long movieID, String commentText) {
         MovieEntry movie = get(movieID);
+
+        if (commentText != null && commentText.length() > 1000) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Kommentar darf maximal 1000 Zeichen lang sein.");
+        }
+
         movie.setCommentText(commentText);
         return repo.save(movie);
+    }
+
+    private void validateMovieID(Long movieID) {
+        if (movieID == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "MovieID darf nicht leer sein.");
+        }
+
+        if (movieID <= 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "MovieID muss groesser als 0 sein.");
+        }
     }
 }
