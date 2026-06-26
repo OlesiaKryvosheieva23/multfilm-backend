@@ -96,9 +96,38 @@ public class MovieEntryService {
     public List<MovieEntry> getToWatch() {
         return repo.findByToWatchTrue();
     }
+
+    public List<MovieEntry> getSeen() {
+        return repo.findBySeenTrue();
+    }
+
     public MovieEntry removeFromWatchlist(Long movieID) {
         MovieEntry movie = repo.findById(movieID).orElseThrow(RuntimeException::new);
         movie.setToWatch(false);
+        return repo.save(movie);
+    }
+
+    public MovieEntry markAsToWatch(Long movieID) {
+        MovieEntry movie = get(movieID);
+        movie.setToWatch(true);
+        return repo.save(movie);
+    }
+
+    public MovieEntry markAsSeen(Long movieID) {
+        MovieEntry movie = get(movieID);
+        movie.setSeen(true);
+        return repo.save(movie);
+    }
+
+    public MovieEntry removeFromSeen(Long movieID) {
+        MovieEntry movie = get(movieID);
+        movie.setSeen(false);
+        return repo.save(movie);
+    }
+
+    public MovieEntry toggleSeen(Long movieID) {
+        MovieEntry movie = get(movieID);
+        movie.setSeen(!movie.isSeen());
         return repo.save(movie);
     }
 }

@@ -78,6 +78,7 @@ public class MovieEntry {
     private String title;
     private String posterUrl;
     private boolean toWatch;
+    private Boolean seen = false;
 
 
     public MovieEntry() {
@@ -138,6 +139,14 @@ public class MovieEntry {
 
     public void setToWatch(boolean toWatch) {
         this.toWatch = toWatch;
+    }
+
+    public boolean isSeen() {
+        return Boolean.TRUE.equals(seen);
+    }
+
+    public void setSeen(boolean seen) {
+        this.seen = seen;
     }
 //
 //    public boolean isFavorite() {

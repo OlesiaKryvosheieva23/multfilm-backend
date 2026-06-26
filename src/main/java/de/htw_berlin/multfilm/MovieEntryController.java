@@ -57,8 +57,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = {
-        "http://localhost:5173",
+@CrossOrigin(originPatterns = {
+        "http://localhost:*",
+        "http://127.0.0.1:*",
+        "http://192.168.*.*:*",
+        "http://10.*.*.*:*",
+        "http://172.*.*.*:*",
         "https://multfilm-frontend.onrender.com"
 })
 @RestController
@@ -81,7 +85,7 @@ public class MovieEntryController {
     }
 
     @CrossOrigin
-    @GetMapping("/{id}")
+    @GetMapping("/{movieID}")
     public MovieEntry getMovieEntry(@PathVariable Long movieID) {
             logger.info("GET request on route /api/movie-entries/{}", movieID);
         return service.get(movieID);
@@ -118,6 +122,12 @@ public class MovieEntryController {
     }
 
     @CrossOrigin
+    @GetMapping("/seen")
+    public List<MovieEntry> getSeen() {
+        return service.getSeen();
+    }
+
+    @CrossOrigin
     @PutMapping("/{movieID}/remove-watchlist")
     public MovieEntry removeFromWatchlist(@PathVariable Long movieID) {
 
@@ -126,5 +136,29 @@ public class MovieEntryController {
         movie.setToWatch(false);
 
         return service.save(movie);
+    }
+
+    @CrossOrigin
+    @PutMapping("/{movieID}/watchlist")
+    public MovieEntry markAsToWatch(@PathVariable Long movieID) {
+        return service.markAsToWatch(movieID);
+    }
+
+    @CrossOrigin
+    @PutMapping("/{movieID}/seen")
+    public MovieEntry markAsSeen(@PathVariable Long movieID) {
+        return service.markAsSeen(movieID);
+    }
+
+    @CrossOrigin
+    @PutMapping("/{movieID}/remove-seen")
+    public MovieEntry removeFromSeen(@PathVariable Long movieID) {
+        return service.removeFromSeen(movieID);
+    }
+
+    @CrossOrigin
+    @PutMapping("/{movieID}/toggle-seen")
+    public MovieEntry toggleSeen(@PathVariable Long movieID) {
+        return service.toggleSeen(movieID);
     }
 }

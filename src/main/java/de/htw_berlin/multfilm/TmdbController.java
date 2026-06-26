@@ -7,8 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
-@CrossOrigin(origins = {
-        "http://localhost:5173",
+@CrossOrigin(originPatterns = {
+        "http://localhost:*",
+        "http://127.0.0.1:*",
+        "http://192.168.*.*:*",
+        "http://10.*.*.*:*",
+        "http://172.*.*.*:*",
         "https://multfilm-frontend.onrender.com"
 })
 //der Controller TmdbController stellt Endpunkte fuer Filmdaten aus der TMDB-API bereit

@@ -16,6 +16,7 @@ public interface MovieEntryRepository extends CrudRepository<MovieEntry, Long> {
 //
 //    List<MovieEntry> findByOwnerAndToWatchTrue(String owner);
 List<MovieEntry> findByToWatchTrue();
+List<MovieEntry> findBySeenTrue();
 //MovieEntry removeByToWatchTrue(Long movieID);
 
 }
