@@ -69,12 +69,30 @@ class MovieEntryServiceTest {
         MovieEntry movie = new MovieEntry();
         movie.setMovieID(1L);
         movie.setSeen(true);
+        movie.setCommentText("War richtig gut.");
         when(repo.findById(1L)).thenReturn(Optional.of(movie));
         when(repo.save(movie)).thenReturn(movie);
 
         MovieEntry result = service.removeFromSeen(1L);
 
         assertFalse(result.isSeen());
+        assertTrue(result.getCommentText().isEmpty());
+        verify(repo).save(movie);
+    }
+
+    @Test
+    void toggleSeenClearsCommentWhenMovieBecomesUnseen() {
+        MovieEntry movie = new MovieEntry();
+        movie.setMovieID(1L);
+        movie.setSeen(true);
+        movie.setCommentText("War richtig gut.");
+        when(repo.findById(1L)).thenReturn(Optional.of(movie));
+        when(repo.save(movie)).thenReturn(movie);
+
+        MovieEntry result = service.toggleSeen(1L);
+
+        assertFalse(result.isSeen());
+        assertTrue(result.getCommentText().isEmpty());
         verify(repo).save(movie);
     }
 

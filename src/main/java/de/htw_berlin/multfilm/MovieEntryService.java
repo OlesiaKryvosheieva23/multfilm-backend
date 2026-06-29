@@ -143,12 +143,19 @@ public class MovieEntryService {
     public MovieEntry removeFromSeen(Long movieID) {
         MovieEntry movie = get(movieID);
         movie.setSeen(false);
+        movie.setCommentText("");
         return repo.save(movie);
     }
 
     public MovieEntry toggleSeen(Long movieID) {
         MovieEntry movie = get(movieID);
-        movie.setSeen(!movie.isSeen());
+        boolean newSeenStatus = !movie.isSeen();
+        movie.setSeen(newSeenStatus);
+
+        if (!newSeenStatus) {
+            movie.setCommentText("");
+        }
+
         return repo.save(movie);
     }
 
