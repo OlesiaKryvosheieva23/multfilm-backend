@@ -144,6 +144,7 @@ public class MovieEntryService {
         MovieEntry movie = get(movieID);
         movie.setSeen(false);
         movie.setCommentText("");
+        movie.setPersonalRating(0);
         return repo.save(movie);
     }
 
@@ -154,6 +155,7 @@ public class MovieEntryService {
 
         if (!newSeenStatus) {
             movie.setCommentText("");
+            movie.setPersonalRating(0);
         }
 
         return repo.save(movie);
@@ -167,6 +169,21 @@ public class MovieEntryService {
         }
 
         movie.setCommentText(commentText);
+        return repo.save(movie);
+    }
+
+    public MovieEntry updatePersonalRating(Long movieID, Integer personalRating) {
+        MovieEntry movie = get(movieID);
+
+        if (personalRating == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bewertung darf nicht leer sein.");
+        }
+
+        if (personalRating < 0 || personalRating > 5) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bewertung muss zwischen 0 und 5 liegen.");
+        }
+
+        movie.setPersonalRating(personalRating);
         return repo.save(movie);
     }
 

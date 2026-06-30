@@ -1,5 +1,6 @@
 package de.htw_berlin.multfilm;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -70,6 +71,7 @@ class MovieEntryServiceTest {
         movie.setMovieID(1L);
         movie.setSeen(true);
         movie.setCommentText("War richtig gut.");
+        movie.setPersonalRating(5);
         when(repo.findById(1L)).thenReturn(Optional.of(movie));
         when(repo.save(movie)).thenReturn(movie);
 
@@ -77,6 +79,7 @@ class MovieEntryServiceTest {
 
         assertFalse(result.isSeen());
         assertTrue(result.getCommentText().isEmpty());
+        assertEquals(0, result.getPersonalRating());
         verify(repo).save(movie);
     }
 
@@ -86,6 +89,7 @@ class MovieEntryServiceTest {
         movie.setMovieID(1L);
         movie.setSeen(true);
         movie.setCommentText("War richtig gut.");
+        movie.setPersonalRating(5);
         when(repo.findById(1L)).thenReturn(Optional.of(movie));
         when(repo.save(movie)).thenReturn(movie);
 
@@ -93,6 +97,7 @@ class MovieEntryServiceTest {
 
         assertFalse(result.isSeen());
         assertTrue(result.getCommentText().isEmpty());
+        assertEquals(0, result.getPersonalRating());
         verify(repo).save(movie);
     }
 
@@ -156,5 +161,32 @@ class MovieEntryServiceTest {
         );
 
         assertTrue(exception.getMessage().contains("maximal 1000"));
+    }
+
+    @Test
+    void updatePersonalRatingSavesRating() {
+        MovieEntry movie = new MovieEntry();
+        movie.setMovieID(1L);
+        when(repo.findById(1L)).thenReturn(Optional.of(movie));
+        when(repo.save(movie)).thenReturn(movie);
+
+        MovieEntry result = service.updatePersonalRating(1L, 4);
+
+        assertEquals(4, result.getPersonalRating());
+        verify(repo).save(movie);
+    }
+
+    @Test
+    void updatePersonalRatingThrowsClearErrorWhenRatingIsInvalid() {
+        MovieEntry movie = new MovieEntry();
+        movie.setMovieID(1L);
+        when(repo.findById(1L)).thenReturn(Optional.of(movie));
+
+        ResponseStatusException exception = assertThrows(
+                ResponseStatusException.class,
+                () -> service.updatePersonalRating(1L, 6)
+        );
+
+        assertTrue(exception.getMessage().contains("zwischen 0 und 5"));
     }
 }

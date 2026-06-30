@@ -169,4 +169,14 @@ public class MovieEntryController {
 
         return service.updateComment(movieID, body.get("commentText"));
     }
+
+    @CrossOrigin
+    @PutMapping("/{movieID}/rating")
+    public MovieEntry updatePersonalRating(@PathVariable Long movieID, @RequestBody Map<String, Integer> body) {
+        if (body == null || !body.containsKey("personalRating")) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Request body braucht das Feld personalRating.");
+        }
+
+        return service.updatePersonalRating(movieID, body.get("personalRating"));
+    }
 }

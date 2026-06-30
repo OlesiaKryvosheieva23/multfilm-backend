@@ -80,6 +80,7 @@ public class MovieEntry {
     private String posterUrl;
     private boolean toWatch;
     private Boolean seen = false;
+    private Integer personalRating = 0;
     @Column(length = 1000)
     private String commentText = "";
 
@@ -158,6 +159,14 @@ public class MovieEntry {
 
     public void setCommentText(String commentText) {
         this.commentText = commentText == null ? "" : commentText;
+    }
+
+    public Integer getPersonalRating() {
+        return personalRating == null ? 0 : personalRating;
+    }
+
+    public void setPersonalRating(Integer personalRating) {
+        this.personalRating = personalRating == null ? 0 : personalRating;
     }
 //
 //    public boolean isFavorite() {
