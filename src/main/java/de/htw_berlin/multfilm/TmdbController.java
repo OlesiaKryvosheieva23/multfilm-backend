@@ -59,23 +59,23 @@ public class TmdbController {
         return getMovieData(id).releaseDate();
     }
 
-    //liefert die Genres eines Films anhand der TMDB-Film-ID
-    @GetMapping("/movie/{id}/genres")
-    public List<String> getMovieGenres(@PathVariable int id) {
-        return getMovieData(id).genres();
-    }
+//    //liefert die Genres eines Films anhand der TMDB-Film-ID
+//    @GetMapping("/movie/{id}/genres")
+//    public List<String> getMovieGenres(@PathVariable int id) {
+//        return getMovieData(id).genres();
+//    }
 
-    //liefert die wichtigsten Schauspieler eines Films anhand der TMDB-Film-ID
-    @GetMapping("/movie/{id}/cast")
-    public List<String> getMovieCast(@PathVariable int id) {
-        return getMovieData(id).cast();
-    }
+//    //liefert die wichtigsten Schauspieler eines Films anhand der TMDB-Film-ID
+//    @GetMapping("/movie/{id}/cast")
+//    public List<String> getMovieCast(@PathVariable int id) {
+//        return getMovieData(id).cast();
+//    }
 
     //liefert den Regisseur eines Films anhand der TMDB-Film-ID
-    @GetMapping("/movie/{id}/director")
-    public String getMovieDirector(@PathVariable int id) {
-        return getMovieData(id).director();
-    }
+//    @GetMapping("/movie/{id}/director")
+//    public String getMovieDirector(@PathVariable int id) {
+//        return getMovieData(id).director();
+//    }
 
     @GetMapping("/movie/{id}/vote-average")
     public Double getMovieVoteAverage(@PathVariable int id) {
