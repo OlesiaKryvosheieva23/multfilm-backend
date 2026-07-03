@@ -3,6 +3,7 @@ package de.htw_berlin.multfilm;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import java.util.Map;
@@ -13,6 +14,7 @@ import static org.mockito.Mockito.doReturn;
 
 
 @SpringBootTest
+@ActiveProfiles("test")
 class MovieServiceTest {
 
 
@@ -21,9 +23,6 @@ class MovieServiceTest {
 
     @MockitoBean
     private TmdbApiClient tmdb;
-
-    @Autowired
-    private org.springframework.core.env.Environment env;
 
 
     @Test
@@ -34,7 +33,6 @@ class MovieServiceTest {
                 "overview", "Das ist Filmüberblick.",
                 "poster_path", "/poster.jpg",
                 "release_date", "2023-01-01",
-                "director", "Patrick Neuer",
                 "vote_average", 8.5
         );
 

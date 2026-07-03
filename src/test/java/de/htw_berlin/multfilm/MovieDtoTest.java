@@ -23,7 +23,6 @@ class MovieDtoTest {
                 ", overview=" + overview +
                 ", posterUrl=" + posterUrl +
                 ", releaseDate=2023-01-01" +
-                ", director=Patrick Neuer" +
                 ", voteAverage=8.5]";
 
         // Tatsächliches Ergebnis

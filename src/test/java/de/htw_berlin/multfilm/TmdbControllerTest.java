@@ -3,12 +3,14 @@ package de.htw_berlin.multfilm;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doReturn;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class TmdbControllerTest {
 
     @Autowired
@@ -16,9 +18,6 @@ class TmdbControllerTest {
 
     @MockitoBean
     private MovieService movieService;
-
-    @MockitoBean
-    private TmdbApiClient tmdb;
 
     @Test
     void testGetMovie() {
