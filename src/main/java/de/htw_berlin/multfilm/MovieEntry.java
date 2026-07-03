@@ -1,65 +1,5 @@
 package de.htw_berlin.multfilm;
 
-//die Klasse MovieEntry, verknüpft einen User mit einem Film und speichert den Status, zum Beispiel TO_WATCH,  SEEN oder FAVORITE
-//enthält Titel
-//enthält Setter und Getter
-
-/*
-Alter Stand, nur auskommentiert:
-
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jdk.jfr.Enabled;
-import org.springframework.data.annotation.Id;
-
-@Enabled
-public class MovieEntry {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    String title;
-    boolean seen;
-    boolean toWatch;
-    boolean favorite;
-
-
-    public MovieEntry() {}
-
-    public MovieEntry(String title) {
-        this.title = title;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public boolean isSeen() {
-        return seen;
-    }
-
-    public boolean isToWatch() {
-        return toWatch;
-    }
-
-    public  boolean isFavorite() {
-        return favorite;
-    }
-
-    public void setFavorite(boolean favorite) {
-        this.favorite = favorite;
-    }
-
-    public void setToWatch(boolean toWatch) {
-        this.toWatch = toWatch;
-    }
-
-    public void setSeen(boolean seen) {
-        this.seen = seen;
-    }
-}
-*/
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -129,14 +69,6 @@ public class MovieEntry {
         this.title = title;
     }
 
-//    public boolean isSeen() {
-//        return seen;
-//    }
-//
-//    public void setSeen(boolean seen) {
-//        this.seen = seen;
-//    }
-//
     public boolean isToWatch() {
         return toWatch;
     }
@@ -168,14 +100,6 @@ public class MovieEntry {
     public void setPersonalRating(Integer personalRating) {
         this.personalRating = personalRating == null ? 0 : personalRating;
     }
-//
-//    public boolean isFavorite() {
-//        return favorite;
-//    }
-//
-//    public void setFavorite(boolean favorite) {
-//        this.favorite = favorite;
-//    }
 
     public String getPosterUrl() {
         return posterUrl;

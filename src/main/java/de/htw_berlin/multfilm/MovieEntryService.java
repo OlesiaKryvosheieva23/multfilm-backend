@@ -1,44 +1,5 @@
 package de.htw_berlin.multfilm;
 
-/*
-Alter Stand, nur auskommentiert:
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
-
-@Service
-public class MovieEntryService {
-
-    @Autowired
-    MovieEntryRepository repo;
-
-    public MoveEntry save(MoveEntry thing) {
-        return repo.save(thing);
-    }
-
-    public MoveEntry get(Long id) {
-        return repo.findById(id).orElseThrow(RuntimeException::ew);
-    }
-
-    public List<MoveEntry> getAllWithoutOwner() {
-        Iterable<MoveEntry> iterator = repo.findAll();
-        List<MoveEntry> things = new ArrayList<MoveEntry>();
-        for (MoveEntry thing : iterator) if(thing.getOwner()==null || thing.getOwner().equals("")) things.add(thing);
-        return things;
-    }
-
-    public List<MoveEntry> getAllOwnedBy(String owner) {
-        Iterable<MoveEntry> iterator = repo.findAll();
-        List<MoveEntry> things = new ArrayList<MoveEntry>();
-        for (MoveEntry thing : iterator) if(thing.getOwner()!=null && thing.getOwner().equals(owner)) things.add(thing);
-        return things;
-    }
-
-}
-*/
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,17 +64,7 @@ public class MovieEntryService {
         return repo.findByOwner(owner);
     }
 
-//    public List<MovieEntry> getFavorites(String owner) {
-//        return repo.findByOwnerAndFavoriteTrue(owner);
-//    }
-//
-//    public List<MovieEntry> getSeen(String owner) {
-//        return repo.findByOwnerAndSeenTrue(owner);
-//    }
-//
-//    public List<MovieEntry> getToWatch(String owner) {
-//        return repo.findByOwnerAndToWatchTrue(owner);
-//    }
+
     public List<MovieEntry> getToWatch() {
         return repo.findByToWatchTrue();
     }

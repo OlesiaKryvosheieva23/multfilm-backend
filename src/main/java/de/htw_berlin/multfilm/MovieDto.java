@@ -1,12 +1,5 @@
 package de.htw_berlin.multfilm;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jdk.jfr.Enabled;
-import org.springframework.data.annotation.Id;
-
-import java.util.List;
-
 //record für die Film-Details, die von der TMDB API zurückgegeben werden
 //enthält Titel, Übersicht, Poster-URL, Veröffentlichungsdatum, Genres, Cast 
 //und Regisseur
@@ -19,9 +12,6 @@ public record MovieDto(
         String overview,
         String posterUrl,
         String releaseDate,
-        List<String> genres,
-        List<String> cast,
-        String director,
         Double voteAverage
 ) {}
 

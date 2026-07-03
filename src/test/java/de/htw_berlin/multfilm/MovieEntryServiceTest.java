@@ -4,8 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -189,4 +188,38 @@ class MovieEntryServiceTest {
 
         assertTrue(exception.getMessage().contains("zwischen 0 und 5"));
     }
+
+    @Test
+    void testMarkAsToWatch() {
+
+        MovieEntry movie = new MovieEntry();
+        movie.setId(42L);
+        movie.setTitle("Boring Movie");
+        movie.setToWatch(false);
+
+        doReturn(Optional.of(movie)).when(repo).findById(42L);
+        doReturn(movie).when(repo).save(movie);
+
+        MovieEntry actual = service.markAsToWatch(42L);
+
+        assertTrue(actual.isToWatch());
+    }
+
+    @Test
+    void testRemoveFromWatchlist() {
+
+        MovieEntry movie = new MovieEntry();
+        movie.setId(42L);
+        movie.setTitle("Boring Movie");
+        movie.setToWatch(true);
+
+        doReturn(Optional.of(movie)).when(repo).findById(42L);
+        doReturn(movie).when(repo).save(movie);
+
+        MovieEntry actual = service.removeFromWatchlist(42L);
+
+        assertFalse(actual.isToWatch());
+    }
+
+
 }
