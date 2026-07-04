@@ -35,11 +35,11 @@ public class TmdbController {
         return getMovieData(id);
     }
 
-//    //liefert den Titel eines Films anhand der TMDB-Film-ID
-//    @GetMapping("/movie/{id}/title")
-//    public String getMovieTitle(@PathVariable int id) {
-//        return getMovieData(id).title();
-//    }
+    //liefert den Titel eines Films anhand der TMDB-Film-ID
+    @GetMapping("/movie/{id}/title")
+    public String getMovieTitle(@PathVariable int id) {
+        return getMovieData(id).title();
+    }
 //
 //    //liefert die Kurzbeschreibung eines Films anhand der TMDB-Film-ID
 //    @GetMapping("/movie/{id}/overview")
@@ -77,11 +77,11 @@ public class TmdbController {
 //        return getMovieData(id).director();
 //    }
 
-//    //liefert die Durchschnittsbewertung eines Films anhand der TMDB-Film-ID
-//    @GetMapping("/movie/{id}/vote-average")
-//    public Double getMovieVoteAverage(@PathVariable int id) {
-//        return getMovieData(id).voteAverage();
-//    }
+    //liefert die Durchschnittsbewertung eines Films anhand der TMDB-Film-ID
+    @GetMapping("/movie/{id}/vote-average")
+    public Double getMovieVoteAverage(@PathVariable int id) {
+        return getMovieData(id).voteAverage();
+    }
 
 
     //liefert eine Liste aktuell trendender Filme aus der TMDB-API

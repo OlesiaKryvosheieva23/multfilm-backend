@@ -22,20 +22,13 @@ public class MovieService {
         Map<String, Object> credits = tmdb.getMovieCredits(tmdbId);
 
 
-        // Regisseur extrahieren
-        List<Map<String, Object>> crewList = (List<Map<String, Object>>) credits.get("crew");
-        String director = crewList.stream()
-                .filter(c -> "Director".equals(c.get("job")))
-                .map(c -> (String) c.get("name"))
-                .findFirst()
-                .orElse("Unbekannt");
+
 
         return new MovieDto(
                 (String) details.get("title"),
                 (String) details.get("overview"),
                 "https://image.tmdb.org/t/p/w500" + details.get("poster_path"),
                 (String) details.get("release_date"),
-                director,
                 ((Number) details.get("vote_average")).doubleValue()
         );
     }

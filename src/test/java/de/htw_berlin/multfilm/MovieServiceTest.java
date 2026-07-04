@@ -41,7 +41,6 @@ class MovieServiceTest {
         MovieDto actual = service.getMovie(1);
 
         assertEquals("Boring Movie", actual.title());
-//        assertEquals("Patrick Neuer", actual.director());
         assertEquals(8.5, actual.voteAverage());
     }
 }

@@ -12,7 +12,6 @@ public record MovieDto(
         String overview,
         String posterUrl,
         String releaseDate,
-        String director,
         Double voteAverage
 ) {}
 
