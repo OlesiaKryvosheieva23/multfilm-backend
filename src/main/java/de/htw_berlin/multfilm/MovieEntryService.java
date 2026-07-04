@@ -16,10 +16,6 @@ public class MovieEntryService {
     @Autowired
     MovieEntryRepository repo;
 
-//    public MovieEntryService(MovieEntryRepository repo) {
-//     this.repo = repo;
-//  }
-
     public MovieEntry save(MovieEntry movieEntry) {
         if (movieEntry == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Movie entry darf nicht leer sein.");

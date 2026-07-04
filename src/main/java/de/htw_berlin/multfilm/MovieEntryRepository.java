@@ -9,14 +9,8 @@ import org.springframework.stereotype.Repository;
 public interface MovieEntryRepository extends CrudRepository<MovieEntry, Long> {
 
     List<MovieEntry> findByOwner(String owner);
+    List<MovieEntry> findByToWatchTrue();
+    List<MovieEntry> findBySeenTrue();
 
-//    List<MovieEntry> findByOwnerAndFavoriteTrue(String owner);
-//
-//    List<MovieEntry> findByOwnerAndSeenTrue(String owner);
-//
-//    List<MovieEntry> findByOwnerAndToWatchTrue(String owner);
-List<MovieEntry> findByToWatchTrue();
-List<MovieEntry> findBySeenTrue();
-//MovieEntry removeByToWatchTrue(Long movieID);
 
 }
