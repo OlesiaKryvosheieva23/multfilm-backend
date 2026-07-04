@@ -15,7 +15,7 @@ class MovieDtoTest {
 
 
         //"System under test" aufsetzen
-        MovieDto movie = new MovieDto(title, overview, posterUrl, "2023-01-01", 8.5);
+        MovieDto movie = new MovieDto(title, overview, posterUrl, "2023-01-01",   8.5);
 
 
         // Erwartetes Ergebnis

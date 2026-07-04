@@ -40,24 +40,24 @@ public class TmdbController {
     public String getMovieTitle(@PathVariable int id) {
         return getMovieData(id).title();
     }
-
-    //liefert die Kurzbeschreibung eines Films anhand der TMDB-Film-ID
-    @GetMapping("/movie/{id}/overview")
-    public String getMovieOverview(@PathVariable int id) {
-        return getMovieData(id).overview();
-    }
-
-    //liefert die Poster-URL eines Films anhand der TMDB-Film-ID
-    @GetMapping("/movie/{id}/poster-url")
-    public String getMoviePosterUrl(@PathVariable int id) {
-        return getMovieData(id).posterUrl();
-    }
-
-    //liefert das Erscheinungsdatum eines Films anhand der TMDB-Film-ID
-    @GetMapping("/movie/{id}/release-date")
-    public String getMovieReleaseDate(@PathVariable int id) {
-        return getMovieData(id).releaseDate();
-    }
+//
+//    //liefert die Kurzbeschreibung eines Films anhand der TMDB-Film-ID
+//    @GetMapping("/movie/{id}/overview")
+//    public String getMovieOverview(@PathVariable int id) {
+//        return getMovieData(id).overview();
+//    }
+//
+//    //liefert die Poster-URL eines Films anhand der TMDB-Film-ID
+//    @GetMapping("/movie/{id}/poster-url")
+//    public String getMoviePosterUrl(@PathVariable int id) {
+//        return getMovieData(id).posterUrl();
+//    }
+//
+//    //liefert das Erscheinungsdatum eines Films anhand der TMDB-Film-ID
+//    @GetMapping("/movie/{id}/release-date")
+//    public String getMovieReleaseDate(@PathVariable int id) {
+//        return getMovieData(id).releaseDate();
+//    }
 
 //    //liefert die Genres eines Films anhand der TMDB-Film-ID
 //    @GetMapping("/movie/{id}/genres")
@@ -77,12 +77,13 @@ public class TmdbController {
 //        return getMovieData(id).director();
 //    }
 
+    //liefert die Durchschnittsbewertung eines Films anhand der TMDB-Film-ID
     @GetMapping("/movie/{id}/vote-average")
     public Double getMovieVoteAverage(@PathVariable int id) {
         return getMovieData(id).voteAverage();
     }
 
-//    @CrossOrigin
+
     //liefert eine Liste aktuell trendender Filme aus der TMDB-API
     @GetMapping("/trending")
     public List<Map<String, Object>> trending() {

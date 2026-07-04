@@ -36,6 +36,8 @@ class TmdbControllerTest {
 
         assertEquals("Boring Movie", actual.title());
         assertEquals("Das ist Filmüberblick.", actual.overview());
+        assertEquals("https://example.com/poster.jpg", actual.posterUrl());
+        assertEquals("2023-01-01", actual.releaseDate());
         assertEquals(8.5, actual.voteAverage());
     }
 
@@ -47,7 +49,6 @@ class TmdbControllerTest {
                 "Das ist Filmüberblick.",
                 "https://example.com/poster.jpg",
                 "2023-01-01",
-
                 8.5
         );
 
@@ -66,7 +67,6 @@ class TmdbControllerTest {
                 "Das ist Filmüberblick.",
                 "https://example.com/poster.jpg",
                 "2023-01-01",
-
                 8.5
         );
 
