@@ -1,13 +1,14 @@
-package de.htw_berlin.multfilm;
+package de.htw_berlin.multfilm.service;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
+import de.htw_berlin.multfilm.MovieEntry;
+import de.htw_berlin.multfilm.MovieEntryRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service

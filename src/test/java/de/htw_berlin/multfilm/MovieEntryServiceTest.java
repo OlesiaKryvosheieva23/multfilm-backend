@@ -9,6 +9,7 @@ import static org.mockito.Mockito.*;
 import java.util.List;
 import java.util.Optional;
 
+import de.htw_berlin.multfilm.service.MovieEntryService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

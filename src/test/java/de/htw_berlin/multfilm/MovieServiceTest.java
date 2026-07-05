@@ -1,5 +1,6 @@
 package de.htw_berlin.multfilm;
 
+import de.htw_berlin.multfilm.service.MovieService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -40,7 +41,13 @@ class MovieServiceTest {
 
         MovieDto actual = service.getMovie(1);
 
+
         assertEquals("Boring Movie", actual.title());
         assertEquals(8.5, actual.voteAverage());
+        assertEquals("https://image.tmdb.org/t/p/w500/poster.jpg", actual.posterUrl());
+        assertEquals("2023-01-01", actual.releaseDate());
+        assertEquals("Das ist Filmüberblick.", actual.overview());
+
+
     }
 }
