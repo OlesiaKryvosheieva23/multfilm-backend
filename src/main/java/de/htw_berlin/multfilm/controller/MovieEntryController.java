@@ -1,8 +1,10 @@
-package de.htw_berlin.multfilm;
+package de.htw_berlin.multfilm.controller;
 
 import java.util.List;
 import java.util.Map;
 
+import de.htw_berlin.multfilm.MovieEntry;
+import de.htw_berlin.multfilm.service.MovieEntryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

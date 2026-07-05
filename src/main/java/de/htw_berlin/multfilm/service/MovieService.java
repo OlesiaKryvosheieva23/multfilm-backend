@@ -1,8 +1,10 @@
-package de.htw_berlin.multfilm;
+package de.htw_berlin.multfilm.service;
 
-import java.util.List;
 import java.util.Map;
 
+import de.htw_berlin.multfilm.MovieDto;
+import de.htw_berlin.multfilm.MovieEntryRepository;
+import de.htw_berlin.multfilm.TmdbApiClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +21,6 @@ public class MovieService {
 
     public MovieDto getMovie(int tmdbId) {
         Map<String, Object> details = tmdb.getMovieDetails(tmdbId);
-        Map<String, Object> credits = tmdb.getMovieCredits(tmdbId);
-
-
 
 
         return new MovieDto(

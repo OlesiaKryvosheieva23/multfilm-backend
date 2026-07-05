@@ -1,8 +1,11 @@
-package de.htw_berlin.multfilm;
+package de.htw_berlin.multfilm.controller;
 
 import java.util.List;
 import java.util.Map;
 
+import de.htw_berlin.multfilm.MovieDto;
+import de.htw_berlin.multfilm.service.MovieService;
+import de.htw_berlin.multfilm.TmdbApiClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -59,23 +62,6 @@ public class TmdbController {
 //        return getMovieData(id).releaseDate();
 //    }
 
-//    //liefert die Genres eines Films anhand der TMDB-Film-ID
-//    @GetMapping("/movie/{id}/genres")
-//    public List<String> getMovieGenres(@PathVariable int id) {
-//        return getMovieData(id).genres();
-//    }
-
-//    //liefert die wichtigsten Schauspieler eines Films anhand der TMDB-Film-ID
-//    @GetMapping("/movie/{id}/cast")
-//    public List<String> getMovieCast(@PathVariable int id) {
-//        return getMovieData(id).cast();
-//    }
-
-    //liefert den Regisseur eines Films anhand der TMDB-Film-ID
-//    @GetMapping("/movie/{id}/director")
-//    public String getMovieDirector(@PathVariable int id) {
-//        return getMovieData(id).director();
-//    }
 
     //liefert die Durchschnittsbewertung eines Films anhand der TMDB-Film-ID
     @GetMapping("/movie/{id}/vote-average")
